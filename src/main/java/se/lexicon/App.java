@@ -1,13 +1,11 @@
 package se.lexicon;
 
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 import java.util.*;
 
 public class App {
     public static void main(String[] args) {
-        ch4();
+        ch1();
 
     }
 
@@ -22,6 +20,7 @@ public class App {
         weekDays.add("Saturday");
         weekDays.add("Sunday");
         System.out.print(weekDays);
+
     }
 
     public static void ex2() {
@@ -92,6 +91,7 @@ public class App {
         setWd.add("Saturday");
         setWd.add("Sunday");
         System.out.println(setWd); //prints: [Monday, Thursday, Friday, Sunday, Wednesday, Tuesday, Saturday]
+
 
     }
 
@@ -181,17 +181,18 @@ public class App {
 
     }
 
+    /**
+     * 12. Create a new class and call it Car.
+     * Add fields for Id,Brand and Model + getters and setters
+     * Create a new hashMap of type <Integer,Car> and populate it
+     * with elements containing an id(Integer) and a car object(Car).
+     * Lastly, print out only the car's brand.
+     */
     public static void ex12() {
-        //12. Create a new class and call it Car.
-        // Add fields for Id,Brand and Model + getters and setters
-        // Create a new hashMap of type <Integer,Car> and populate it
-        // with elements containing an id(Integer) and a car object(Car).
-        // Lastly, print out only the car's brand.
         Map<Integer, Car> carMap = new HashMap<Integer, Car>();
         carMap.put(1, new Car(23, "Volvo", "V90"));
         carMap.put(2, new Car(34, "Mercedes", "E220"));
         carMap.put(3, new Car(55, "Mazda", "X3"));
-
 
         for (Map.Entry<Integer, Car> carEntry : carMap.entrySet()) {
             System.out.println(carEntry.getValue().getBrand());
@@ -204,30 +205,43 @@ public class App {
         //1. Create an empty set and populate it with the all the days of the week.
         // Next create a second set and populate it with ONLY the weekend days (SATURDAY and SUNDAY).
         // Lastly, compare the two sets and retain in the first set only those days that are the same in both sets.
-        HashSet<String> setWd1 = new HashSet<String>();
-        setWd1.add("Monday");
-        setWd1.add("Tuesday");
-        setWd1.add("Wednesday");
-        setWd1.add("Thursday");
-        setWd1.add("Friday");
-        setWd1.add("Saturday");
-        setWd1.add("Sunday");
-        System.out.println("First set contains: " + setWd1);
+        HashSet<String> weekdays = new HashSet<String>();
+        weekdays.add("Monday");
+        weekdays.add("Tuesday");
+        weekdays.add("Wednesday");
+        weekdays.add("Thursday");
+        weekdays.add("Friday");
+        weekdays.add("Saturday");
+        weekdays.add("Sunday");
+        System.out.println("First set contains: " + weekdays);
         System.out.println("_________________________________");
 
-        HashSet<String> setWend = new HashSet<String>();
-        setWend.add("Saturday");
-        setWend.add("Sunday");
-        System.out.println("Second set contains: " + setWend);
+        HashSet<String> weekend = new HashSet<String>();
+        weekend.add("Saturday");
+        weekend.add("Sunday");
+        System.out.println("Second set contains: " + weekend);
         System.out.println("_________________________________");
 
-        boolean bResult = setWend.addAll(setWd1);
+        String[] tmp = new String[7];
+        int i = 0;
+        for (String set2 : weekend) {
+            for (String set1 : weekdays) {
+                if (Objects.equals(set2, set1)) { // if (set2 == set1) {
+                    tmp[i] = set1;
+                    i++;
+                }
+            }
 
-        if (bResult) {
-            System.out.println("Merging of Set 1 & Set 2 Successfull");
         }
+        weekdays.clear();
+        weekdays.addAll(Arrays.asList(tmp));
+        System.out.println("The first set contains now: ");
+        for (String set1 : weekdays) {
+            if (set1 != null) {
+                System.out.println(set1);
 
-        System.out.println("The new set contains= " + setWend);
+            }
+        }
 
     }
 
@@ -259,9 +273,9 @@ public class App {
         superHeroList.add(new SuperHero(1, "Henrik", 24));
         superHeroList.add(new SuperHero(2, "Johanna", 23));
         superHeroList.add(new SuperHero(3, "Karin", 7));
-        System.out.println(superHeroList.toString());
+        System.out.println(superHeroList);
         Collections.sort(superHeroList);
-        System.out.println(superHeroList.toString());
+        System.out.println(superHeroList);
 
     }
 
@@ -269,7 +283,7 @@ public class App {
         //4. Create an array of type int with numbers: {1,4,4,2,6,7}.
         // Next, create an appropriate Collection and populate it with the content of the int array.
         // Lastly, print out each element in the Collection without duplicates.
-        int [] numbers = {1,4,4,2,6,7};
+        int[] numbers = {1, 4, 4, 2, 6, 7};
         Set<Integer> set = new HashSet<>();
         for (int v : numbers) {
             set.add(v);
